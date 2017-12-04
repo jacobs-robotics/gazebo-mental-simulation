@@ -12,6 +12,12 @@ echo -e "${GREEN}>>> Updating ${meta_package_name}...${NC}" \
 	&& wstool merge --merge-kill-append -y $meta_package_name/$meta_package_rosinstall_path )
 	( cd $image_name/src \
     && wstool up --backup-changed-uris=../backup )
+
+# update experiments repo    
+if [ -n "$experiments_repo_uri" ]; then
+    echo -e "${GREEN}>>> Updating ${experiments_repo_name} code...${NC}"
+    ( cd $experiments_repo_name && git pull )
+fi
     
 # re-build docker image and containers, in case there are additional dependencies
 echo -e "${GREEN}>>> Re-building image because dependencies may have changed...${NC}"

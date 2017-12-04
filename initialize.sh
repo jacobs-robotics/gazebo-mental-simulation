@@ -42,6 +42,7 @@ do
         --volume=`pwd`/gazebo_models:/home/${user}/.gazebo/models \
         --volume=`pwd`/results:/home/${user}/results \
         --volume=`pwd`/logs:/home/${user}/logs \
+        --volume=`pwd`/ros_logs:/home/${user}/.ros/log \
         --volume=`pwd`/world_files:/home/${user}/world_files \
         ${image_name}
         

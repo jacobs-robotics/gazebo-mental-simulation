@@ -27,10 +27,14 @@ git pull
 echo -e "${GREEN}>>> Installing dependencies (sudo required)...${NC}"
 sudo apt-get install -y python-wstool mercurial xvfb psmisc
 
-# download Gazebo models
+# download Gazebo models - use user-provided ones if specified, default ones otherwise
 if !(test -e gazebo_models); then
-    echo -e "${GREEN}>>> Downloading default Gazebo simulation models (this may take a while)...${NC}"
-    hg clone https://bitbucket.org/osrf/gazebo_models 
+    if [ -n "$gazebo_models_repo_uri" ]; then
+        git clone -b $gazebo_models_repo_branch $gazebo_models_repo_uri $gazebo_models_repo_name
+    else
+        echo -e "${GREEN}>>> Downloading default Gazebo simulation models (this may take a while)...${NC}"
+        hg clone https://bitbucket.org/osrf/gazebo_models 
+    fi
 fi
 
 # make workspace and pull code
@@ -38,12 +42,19 @@ echo -e "${GREEN}>>> Downloading code for workspace (this may take a while)...${
 	&& mkdir -p $image_name/src \
 	&& mkdir -p results \
 	&& mkdir -p logs \
+	&& mkdir -p ros_logs \
 	&& mkdir -p world_files \
 	&& ( cd $image_name/src \
 	&& git clone -b $meta_package_branch $meta_package_uri $meta_package_name \
 	&& wstool merge --merge-kill-append -y $meta_package_name/$meta_package_rosinstall_path )
 	( cd $image_name/src \
     && wstool up --backup-changed-uris=../backup )
+    
+# clone external experiments repo if provided
+if [ -n "$experiments_repo_uri" ]; then
+    echo -e "${GREEN}>>> Downloading experiments code...${NC}"
+    git clone -b $experiments_repo_branch $experiments_repo_uri $experiments_repo_name
+fi
 
 # download graphics driver if necessary
 NVIDIA_VERSION=""

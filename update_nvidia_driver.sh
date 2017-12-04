@@ -16,10 +16,10 @@ if [[ ($# -gt 0 && $1 == "-s") ]]; then
 fi
 
 # download the correct driver version
-echo -e "${GREEN}>>> Downloading and installing latest Nvidia graphics driver (sudo required)...${NC}"
+echo -e "${GREEN}>>> Downloading and installing latest Nvidia graphics driver...${NC}"
 NVIDIA_DRIVER=/tmp/nvidia/NVIDIA.run
 mkdir -p /tmp/nvidia
-sudo chown -R $user:$user /tmp/nvidia
+chown -R $user:$user /tmp/nvidia
 curl "http://us.download.nvidia.com/XFree86/Linux-x86_64/${NVIDIA_VERSION}/NVIDIA-Linux-x86_64-${NVIDIA_VERSION}.run" -o $NVIDIA_DRIVER
 
 # reset the flag which marks if the driver has been installed already

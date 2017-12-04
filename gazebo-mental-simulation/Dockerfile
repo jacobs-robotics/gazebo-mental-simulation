@@ -144,6 +144,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     ros-indigo-image-view \
     ros-indigo-log4cpp \
     ros-indigo-rosjava-build-tools \
+    ros-indigo-rviz-visual-tools \
     && rm -rf /var/lib/apt/lists/*
         
 # install scikit-learn
@@ -160,7 +161,6 @@ RUN test -f /usr/lib/x86_64-linux-gnu/libGL.so || ln -s -f -i /usr/lib/libGL.so.
 RUN mkdir -p /home/$user/$image_name/src
 RUN mkdir -p /home/$user/.gazebo/models
 RUN mkdir -p /home/$user/results
-RUN mkdir -p /home/$user/logs
 RUN mkdir -p /home/$user/world_files
 RUN rm /etc/ros/rosdep/sources.list.d/20-default.list
 RUN rosdep init

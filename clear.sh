@@ -14,7 +14,7 @@ if [ "$1" == "-i" ]; then
     read -p "<y/N> " prompt
     if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" ]]
     then
-        images=$(docker images -aq --filter="${image_name}" &> /dev/null)
+        images=$(docker images -aq ${image_name})
         if [ ${#images} -gt 0 ]; then
             echo -e "${GREEN}>>> Deleting existing Docker images.${NC}"
             docker rmi -f ${images} &> /dev/null
