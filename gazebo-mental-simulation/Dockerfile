@@ -168,6 +168,4 @@ RUN /bin/bash -c ". /opt/ros/indigo/setup.bash; cd /home/$user/$image_name; catk
 RUN /bin/bash -c "echo source /home/$user/$image_name/devel/setup.bash >> /home/$user/.bashrc"
 RUN /bin/bash -c "chown -R $user:$user /home/$user/"
 
-# TODO this needs to be fixed - start Xvfb to have an X11 terminal open, this allows for GUI applications to run
-#CMD /bin/bash -c ". /usr/share/gazebo/setup.sh && rm -f /tmp/.X1-lock && Xvfb :1 -screen 0 1600x1200x16 && tail -f /dev/null"
 CMD /bin/bash -c ". /usr/share/gazebo/setup.sh && tail -f /dev/null" 
