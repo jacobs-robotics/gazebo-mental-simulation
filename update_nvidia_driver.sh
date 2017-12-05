@@ -23,7 +23,7 @@ chown -R $user:$user /tmp/nvidia
 curl "http://us.download.nvidia.com/XFree86/Linux-x86_64/${NVIDIA_VERSION}/NVIDIA-Linux-x86_64-${NVIDIA_VERSION}.run" -o $NVIDIA_DRIVER
 
 # reset the flag which marks if the driver has been installed already
-rm /tmp/nvidia/NVIDIA.installed &>/dev/null
+rm /tmp/nvidia/NVIDIA.*.installed &>/dev/null
 
 if [[ ("$NO_START_CONTAINERS" -eq "0" ) ]]; then
     ./start.sh

@@ -27,10 +27,11 @@ do
     # install Nvidia driver if this system uses Nvidia graphics
     # this can be done here only because we need to mount the graphics driver into the container and this works only when the container has been started before
     if test -f /tmp/nvidia/NVIDIA.run; then
-        if ! test -f /tmp/nvidia/NVIDIA.installed; then
+        if ! test -f /tmp/nvidia/NVIDIA.${container}.installed; then
             echo -e "${GREEN}>>> Installing Nvidia graphics driver...${NC}"
-            docker exec -it --user="root" ${container} /bin/bash -c ". /home/${user}/${image_name}/devel/setup.bash && if test -f /tmp/nvidia/NVIDIA.run; then if ! test -f /tmp/nvidia/NVIDIA.installed; then chmod +x /tmp/nvidia/NVIDIA.run && ( /bin/sh /tmp/nvidia/NVIDIA.run -s --no-kernel-module ) && touch /tmp/nvidia/NVIDIA.installed; fi; fi";
-            ./stop.sh
+            docker exec -it --user="root" ${container} /bin/bash -c ". /home/${user}/${image_name}/devel/setup.bash && if test -f /tmp/nvidia/NVIDIA.run; then if ! test -f /tmp/nvidia/NVIDIA.installed; then chmod +x /tmp/nvidia/NVIDIA.run && ( /bin/sh /tmp/nvidia/NVIDIA.run -s --no-kernel-module ); fi; fi" \
+             && docker exec -it --user="${user}" ${container} /bin/bash -c "touch /tmp/nvidia/NVIDIA.${container}.installed"
+            docker kill ${container} &> /dev/null
             docker start $INTERACTIVE ${container} &
             # wait until the container is officially running
             until [ "`/usr/bin/docker inspect -f {{.State.Running}} ${container}`" == "true" ]; do
