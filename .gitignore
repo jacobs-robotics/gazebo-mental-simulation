@@ -1,3 +1,6 @@
-NVIDIA.run
-gazebo_models
+gazebo-mental-simulation-models
 src
+logs
+results
+ros_logs
+world_files
