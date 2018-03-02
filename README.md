@@ -9,7 +9,7 @@ This repository contains a number of scripts and configurations to create and ma
 ## Installation
 This step needs to be run for the initial creation of the Docker containers as well as for cloning and building the ROS workspaces for deploying your custom experimental setup.
 1. install Docker as listed above
-2. clone this repository branch: `git clone https://github.com/cheffe112/gazebo-mental-simulation.git`
+2. clone this repository branch: `git clone https://github.com/jacobs-robotics/gazebo-mental-simulation.git`
 3. setup your environment as described below
 4. execute `./create.sh` script which will 
    - install further dependencies

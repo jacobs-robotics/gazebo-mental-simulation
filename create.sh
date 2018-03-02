@@ -49,6 +49,12 @@ echo -e "${GREEN}>>> Downloading code for workspace (this may take a while)...${
 	&& wstool merge --merge-kill-append -y $meta_package_name/$meta_package_rosinstall_path )
 	( cd $image_name/src \
     && wstool up --backup-changed-uris=../backup )
+
+# copy world files from meta package
+if [ -d "$meta_package_name/meta_package_world_file_path" ]; then
+    echo -e "${GREEN}>>> Copying world files from meta package...${NC}"
+    ( cd world_files && cp -r $meta_package_name/meta_package_world_file_path/* . )
+fi
     
 # clone external experiments repo if provided
 if [ -n "$experiments_repo_uri" ]; then
