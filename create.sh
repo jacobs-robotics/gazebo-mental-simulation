@@ -42,17 +42,15 @@ echo -e "${GREEN}>>> Downloading code for workspace (this may take a while)...${
 	&& mkdir -p results \
 	&& mkdir -p logs \
 	&& mkdir -p ros_logs \
-	&& mkdir -p world_files \
-	&& ( cd $image_name/src \
-	&& git clone -b $meta_package_branch $meta_package_uri $meta_package_name \
-	&& wstool merge --merge-kill-append -y $meta_package_name/$meta_package_rosinstall_path )
-	( cd $image_name/src \
-    && wstool up --backup-changed-uris=../backup )
+	&& mkdir -p world_files
+	( cd $image_name/src && git clone -b $meta_package_branch $meta_package_uri $meta_package_name )
+	( cd $image_name/src && cp $meta_package_name/$meta_package_rosinstall_path .rosinstall )
+	( cd $image_name/src && wstool up --backup-changed-uris=../backup )
 
 # copy world files from meta package
-if [ -d "$meta_package_name/meta_package_world_file_path" ]; then
+if [ -d "$world_file_path" ]; then
     echo -e "${GREEN}>>> Copying world files from meta package...${NC}"
-    ( cd world_files && cp -r $meta_package_name/meta_package_world_file_path/* . )
+    cp -r $world_file_path/* world_files
 fi
     
 # clone external experiments repo if provided
