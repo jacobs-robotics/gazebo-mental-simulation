@@ -20,7 +20,6 @@ fi
 
 # update this repo first
 echo -e "${GREEN}>>> Updating this repository...${NC}"
-git checkout --track origin/develop
 git pull
 
 # install dependencies
