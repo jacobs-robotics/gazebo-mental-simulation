@@ -29,7 +29,7 @@ sudo apt-get install -y python-wstool mercurial xvfb psmisc
 # download Gazebo models - use user-provided ones if specified, default ones otherwise
 if !(test -e gazebo_models); then
     if [ -n "$gazebo_models_repo_uri" ]; then
-        git clone -b $gazebo_models_repo_branch $gazebo_models_repo_uri $gazebo_models_repo_name
+        git clone -b $gazebo_models_repo_branch $gazebo_models_repo_uri gazebo_models
     else
         echo -e "${GREEN}>>> Downloading default Gazebo simulation models (this may take a while)...${NC}"
         hg clone https://bitbucket.org/osrf/gazebo_models 
