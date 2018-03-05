@@ -160,6 +160,7 @@ RUN test -f /usr/lib/x86_64-linux-gnu/libGL.so || ln -s -f -i /usr/lib/libGL.so.
 # create initial workspace
 RUN mkdir -p /home/$user/$image_name/src
 RUN mkdir -p /home/$user/.gazebo
+RUN mkdir -p /home/$user/.ros
 RUN mkdir -p /home/$user/results
 RUN mkdir -p /home/$user/world_files
 RUN rm /etc/ros/rosdep/sources.list.d/20-default.list
