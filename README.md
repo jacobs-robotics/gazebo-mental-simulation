@@ -97,3 +97,7 @@ Often it also helps to clear and rebuild the containers and images using
 ```bash
 ./clear.sh -i
 ```
+
+## Running Experiments
+Your own experiments can be implemented in the *experiments repository* defined in `config/containers.cfg`. However, we provide an [example experiments package](https://github.com/jacobs-robotics/gazebo-mental-simulation-experiments) with a bunch of scripts to run repetitive experiments. This package is downloaded automatically because it is set as the default experiments repository.
+Please refer to https://github.com/jacobs-robotics/gazebo-mental-simulation-experiments on how to run the experiments after building the containers and code as described above.
