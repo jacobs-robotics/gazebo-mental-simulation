@@ -66,7 +66,7 @@ if [ -d /sys/module/nvidia ]; then
 fi
 if [[ "$NVIDIA_VERSION" != "" ]]; then
 	echo -e "${GREEN}>>> Graphics configuration: Using Nvidia driver.${NC}"
-    ./update_nvidia_driver.sh -s
+    ./update_nvidia_driver.sh
 else
 	echo -e "${GREEN}>>> Graphics configuration: Using Intel driver. This may or may not work if you use an AMD graphics card.${NC}"
 fi

@@ -27,7 +27,5 @@ for container in ${containers}
 do
     echo -e "${GREEN}>>> Building $container container...${NC}"
     docker build --build-arg user=$user --build-arg userid=$userid --build-arg group=$group --build-arg groupid=$groupid --build-arg image_name=$image_name -t $container $image_name || exit $?
-    # apt-get install the stuff manually which, weirdly enough, does not work via Dockerfile
-    #docker exec -it --user=root ${container} /bin/bash -c "apt-get update && apt-get install -y ros-indigo-rviz-visual-tools ros-indigo-pr2-controllers-msgs libignition-math2-dev"
 done
 

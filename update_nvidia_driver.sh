@@ -10,23 +10,23 @@ else
   exit 1
 fi
 
-NO_START_CONTAINERS=0
-if [[ ($# -gt 0 && $1 == "-s") ]]; then
-    NO_START_CONTAINERS=1
-fi
-
 # download the correct driver version
-echo -e "${GREEN}>>> Downloading and installing latest Nvidia graphics driver (sudo required)...${NC}"
+echo -e "${GREEN}>>> Downloading and installing latest Nvidia graphics driver...${NC}"
 NVIDIA_DRIVER=/tmp/nvidia/NVIDIA.run
 mkdir -p /tmp/nvidia
-sudo chown -R $user:$user /tmp/nvidia
+chown -R $user:$user /tmp/nvidia
 curl "http://us.download.nvidia.com/XFree86/Linux-x86_64/${NVIDIA_VERSION}/NVIDIA-Linux-x86_64-${NVIDIA_VERSION}.run" -o $NVIDIA_DRIVER
 
 # reset the flag which marks if the driver has been installed already
-rm /tmp/nvidia/NVIDIA.installed &>/dev/null
-
-if [[ ("$NO_START_CONTAINERS" -eq "0" ) ]]; then
-    ./start.sh
-fi
+for container in ${containers}
+do
+    echo -e "${GREEN}>>> Installing Nvidia driver in "$container" container...${NC}"
+    docker start ${container} &
+	# wait until the container is officially running
+	until [ "`/usr/bin/docker inspect -f {{.State.Running}} ${container}`" == "true" ]; do
+		sleep 0.1;
+	done;
+    docker exec -it --user="root" ${container} /bin/bash -c "if test -f /tmp/nvidia/NVIDIA.run; then chmod +x /tmp/nvidia/NVIDIA.run && ( /bin/sh /tmp/nvidia/NVIDIA.run -s --no-kernel-module ) && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -fy; fi";
+done
 
 echo -e "${GREEN}>>> DONE!${NC}"
