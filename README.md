@@ -1,6 +1,16 @@
 # Gazebo Mental Simulation Framework
 This repository contains a number of scripts and configurations to create and maintain a complete setup of parallelized experiments in the [Gazebo](http://gazebosim.org/) simulation, wrapped in [Docker](https://www.docker.com/) containers.
 
+This Mental Simulation framework is described and used in
+```
+T. Fromm and A. Birk, Physics-Based Damage-Aware Manipulation Strategy Planning Using Scene Dynamics Anticipation, International Conference on Intelligent Robots and Systems, 2016, https://arxiv.org/abs/1603.00652
+```
+and
+
+```
+T. Doernbach, Self-Supervised Damage-Avoiding Manipulation Strategy Optimization via Mental Simulation, https://arxiv.org/abs/1712.07452
+```
+
 ## Dependencies
 * Intel or Nvidia graphics card (necessary for the Gazebo visualization, AMD cards are yet untested)
 * Linux Kernel 3.10+ (e.g. Ubuntu 14.04 LTS)
