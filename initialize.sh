@@ -1,5 +1,6 @@
 #!/bin/bash
-source config/containers.cfg
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+source $parent_path/config/containers.cfg
 
 for ((container_index=1; container_index<=$num_containers; container_index++))
 do

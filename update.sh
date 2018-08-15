@@ -1,6 +1,7 @@
 #!/bin/bash
 # update all repos from the respective source control
-source config/containers.cfg
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+source $parent_path/config/containers.cfg
 
 echo -e "${GREEN}>>> Updating this repository...${NC}"
 git pull

@@ -1,5 +1,6 @@
 #!/bin/bash
-source config/containers.cfg
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+source $parent_path/config/containers.cfg
 
 if [ ${#containers} -gt 0 ]; then
     echo -e "${GREEN}>>> Deleting existing Docker containers.${NC}"

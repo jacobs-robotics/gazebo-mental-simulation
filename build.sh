@@ -1,6 +1,7 @@
 #!/bin/bash
 # mount and build all code inside the containers
-source config/containers.cfg
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+source $parent_path/config/containers.cfg
 
 ./initialize.sh
 

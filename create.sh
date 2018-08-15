@@ -1,6 +1,7 @@
 #!/bin/bash
 # initially create containers
-source config/containers.cfg
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+source $parent_path/config/containers.cfg
 
 if !(test -e /usr/bin/docker); then
   echo -e "${RED}>>> ERROR: Please install Docker as described on https://docs.docker.com/engine/installation/ !${NC}" >&2
